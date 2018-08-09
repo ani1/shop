@@ -1,0 +1,4 @@
+<% content_for :header do %>
+    Create Item Tax for <%= @item.name.upcase %>
+<% end %>
+<%= render 'form', item_tax: @item_tax %>

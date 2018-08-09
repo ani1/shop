@@ -1,0 +1,33 @@
+<% content_for :header do %>
+    Items List
+<% end %>
+
+<% if @items.present? %>
+        <table class="table table-striped">
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Rate</th>
+            <th>Total Tax</th>
+            <th>Grand Total</th>
+            <th>Action</th>
+          </tr>
+          <% @items.each do |item| %>
+              <tr>
+                <td><%= item.name.upcase %></td>
+                <td><%= item.category.name.upcase %></td>
+                <td><%= item.rate %></td>
+                <td><%= item.total_tax %></td>
+                <td><%= item.grand_total %></td>
+                <td>
+                  <%= link_to('Manage Taxes', item_item_taxes_path(item), class: "btn btn-link") %>
+                  <%= link_to 'Delete', item_path(item, categories_selection: {ids: @cat_ids}), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger'%>
+                </td>
+              </tr>
+          <% end %>
+        </table>
+<% else %>
+    <div class="well" style="margin: 10px;">No Items found</div>
+<% end %>
+<br/>
+<%= link_to('Back to all categories', categories_path, class: "btn btn-link") %>

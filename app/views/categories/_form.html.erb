@@ -1,0 +1,9 @@
+<div class="row">
+<%= simple_form_for(category, html: {class: 'col-md-6'}) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name , :input_html => { :size => 80, :maxlength => 80}%>
+      <br/>
+    <%= f.button :submit, class: "btn btn-success", value: 'Save' %>
+    <%= link_to('Cancel' , categories_path, class: "btn btn-link") %>
+<% end %>
+</div>

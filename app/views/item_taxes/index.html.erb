@@ -1,0 +1,44 @@
+<% content_for :header do %>
+    <%= @item.name.upcase %> Taxes
+<% end %>
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+      <% @item_taxes.each do |item_tax| %>
+          <tr>
+            <td><%= item_tax.tax_name.upcase %></td>
+            <td><%= item_tax.tax %></td>
+            <td><%= item_tax.tax_type %></td>
+            <td><%= item_tax.amount %></td>
+            <td>
+              <%= link_to 'Delete', item_item_tax_path(@item, item_tax), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger'%>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+    <%= link_to 'Add Tax', new_item_item_tax_path(@item), class: "btn btn-success"%>
+    <%= link_to "#{@item.category.name} items list", items_path(categories_selection: {ids: [@item.category.id]}), class: "btn btn-link"%>
+<hr/>
+<div class="col-md-3">
+  <h4>Item Total Amount</h4>
+<table class="table table-condensed table-bordered">
+  <tr>
+    <td><b>Rate : </b></td>
+    <td><%= @item.rate %></td>
+  </tr>
+  <tr>
+    <td><b>Total Taxes : </b></td>
+    <td><%= @item.total_tax %></td>
+  </tr>
+  <tr>
+    <td><b>Grand Total</b></td>
+    <td><b><%= @item.grand_total %></b></td>
+  </tr>
+
+</table>
+</div>

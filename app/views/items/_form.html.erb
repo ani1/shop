@@ -1,0 +1,11 @@
+<div class="row">
+  <%= simple_form_for(item, html: {class: 'col-md-6'}, :url => category_items_path) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :name , :input_html => { :size => 80, :maxlength => 80}%>
+      <br/>
+      <%= f.input :rate , :input_html => {value: number_with_precision(f.object.rate, precision: 2)}%>
+      <br/>
+      <%= f.button :submit, class: "btn btn-success", value: 'Save' %>
+      <%= link_to('Cancel' , categories_path, class: "btn btn-link") %>
+  <% end %>
+</div>

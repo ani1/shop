@@ -1,0 +1,30 @@
+<% content_for :header do %>
+    Categories
+<% end %>
+<%= link_to 'Add Category', new_category_path, class: "btn btn-success" %>
+<% if @categories.any? %>
+<%= simple_form_for :categories_selection, url: items_path, method: :get do |f| %>
+<table class="table table-striped">
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Action</th>
+  </tr>
+  <% @categories.each do |cat| %>
+      <tr>
+        <td><%= f.check_box :ids, { multiple: true }, cat.id, false %></td>
+        <td><%= cat.name.upcase %></td>
+        <td>
+          <%= link_to 'Edit', edit_category_path(cat), class: "btn btn-sm btn-primary"%>
+          <%= link_to 'Delete', category_path(cat), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger'%>
+          <%= link_to 'Add Item', new_category_item_path(cat), class: "btn btn-sm btn-success"%>
+          <%= link_to 'Show Items', items_path(categories_selection: {ids: [cat.id]}), class: "btn btn-sm btn-info"%>
+        </td>
+      </tr>
+  <% end %>
+</table>
+    <%= f.submit class: "btn btn-info", value: 'Show items of selected categories'%>
+<% end %>
+<% else %>
+    <div class="well" style="margin: 10px;">No Categories found</div>
+<% end %>

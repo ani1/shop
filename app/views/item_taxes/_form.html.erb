@@ -1,0 +1,13 @@
+<div class="row">
+  <%= simple_form_for(item_tax, html: {class: 'col-md-6'}, :url => item_item_taxes_path) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :tax_name, :input_html => { :size => 80, :maxlength => 80}%>
+      <br/>
+      <%= f.input :tax_type, :collection => { 'Percentage' => :percentage, 'Value' => :value}, :include_blank => false %>
+      <br/>
+      <%= f.input :tax, :input_html => {value: number_with_precision(f.object.tax, precision: 2)}%>
+      <br/>
+      <%= f.button :submit, class: "btn btn-success", value: 'Save' %>
+      <%= link_to('Cancel' , item_item_taxes_path, class: "btn btn-link") %>
+  <% end %>
+</div>
